@@ -1,0 +1,1723 @@
+/* =========================================================
+   LIVE WEATHER — COMPLETE CSS
+   ========================================================= */
+
+
+/* =========================================================
+   GLOBAL
+   ========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    width: 100%;
+    min-height: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    width: 100%;
+    min-height: 100vh;
+
+    /* Default background */
+    background-image: url("assets/dayy.png");
+    background-position: center;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    transition: background-image 1s ease-in-out;
+
+    font-family: "Comfortaa", sans-serif;
+    color: white;
+
+    overflow-x: hidden;
+
+    position: relative;
+}
+
+
+/* =========================================================
+   BACKGROUND DARK OVERLAY
+   ========================================================= */
+
+body::before {
+    content: "";
+
+    position: fixed;
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.25);
+
+    pointer-events: none;
+
+    z-index: 0;
+}
+
+/* =========================================================
+   TIME BASED BACKGROUND
+   ========================================================= */
+
+/* DAY */
+
+body.time-day {
+    background-image: url("assets/dayy.png");
+}
+
+
+/* EVENING */
+
+body.time-evening {
+    background-image: url("assets/evening.png");
+}
+
+
+/* NIGHT */
+
+body.time-night {
+    background-image: url("assets/nightt.png");
+}
+
+
+/* =========================================================
+   SEARCH AREA
+   ========================================================= */
+
+.searchBar {
+    width: 100%;
+    min-height: 150px;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    padding-top: 18px;
+
+    position: relative;
+    z-index: 10;
+}
+
+
+.searchBarParentDiv {
+    width: 52%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    position: relative !important;
+}
+
+
+/* =========================================================
+   SEARCH INPUT
+   ========================================================= */
+
+.inputfield,
+#cityInput {
+    width: 100%;
+    height: 48px;
+
+    padding: 0 58px 0 20px;
+
+    border: none;
+    outline: none;
+
+    border-radius: 30px;
+
+    font-family: "Comfortaa", sans-serif;
+    font-size: 17px;
+
+    background: rgba(255, 255, 255, 0.95);
+    color: #333;
+}
+
+#cityInput::placeholder {
+    color: #777;
+}
+
+#cityInput:focus,
+.inputfield:focus {
+    outline: none;
+}
+
+
+/* =========================================================
+   SEARCH INPUT WRAPPER
+   ========================================================= */
+
+.searchInputWrapper {
+    width: 100%;
+    height: 48px;
+
+    position: relative;
+}
+
+
+/* =========================================================
+   SEARCH BUTTON
+   ========================================================= */
+
+.searchButton {
+    position: absolute;
+
+    top: 50%;
+    right: 12px;
+
+    width: 40px;
+    height: 40px;
+
+    transform: translateY(-50%);
+
+    border: none;
+    outline: none;
+
+    padding: 0;
+
+    background: transparent;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    z-index: 50;
+}
+
+
+.searchButton img {
+    width: 30px;
+    height: 30px;
+
+    object-fit: contain;
+
+    display: block;
+}
+
+
+.searchButton:hover img {
+    transform: scale(1.08);
+}
+
+
+
+
+
+/* =========================================================
+   TEMPERATURE UNIT TOGGLE
+   ========================================================= */
+
+.unitToggle {
+    position: absolute;
+
+    right: 0;
+    top: 58px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 3px;
+
+    padding: 3px;
+
+    border-radius: 20px;
+
+    background: rgba(0, 0, 0, 0.25);
+
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    z-index: 50;
+}
+
+
+.unitBtn {
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    color: white;
+
+    font-family: "Comfortaa", sans-serif;
+    font-size: 12px;
+
+    padding: 5px 9px;
+
+    border-radius: 15px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.unitBtn:hover {
+    transform: scale(1.05);
+}
+
+
+.unitBtn.active {
+    background: rgba(255, 255, 255, 0.9);
+
+    color: #17365d;
+
+    font-weight: bold;
+}
+
+
+/* =========================================================
+   CURRENT LOCATION BUTTON
+   ========================================================= */
+
+.locationBtn {
+    position: relative;
+
+    margin-top: 10px;
+
+    padding: 8px 16px;
+
+    border: 1px solid rgba(255, 255, 255, 0.35);
+
+    border-radius: 20px;
+
+    background: rgba(255, 255, 255, 0.15);
+
+    color: white;
+
+    font-family: "Comfortaa", sans-serif;
+    font-size: 13px;
+
+    cursor: pointer;
+
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+
+    z-index: 10;
+
+    transition:
+        background 0.25s ease,
+        transform 0.25s ease;
+}
+
+
+.locationBtn:hover {
+    background: rgba(255, 255, 255, 0.25);
+
+    transform: translateY(-1px);
+}
+
+
+.locationBtn:disabled {
+    opacity: 0.6;
+
+    cursor: not-allowed;
+
+    transform: none;
+}
+
+
+/* =========================================================
+   RECENT SEARCHES
+   ========================================================= */
+
+.recentSearches {
+    width: 100%;
+
+    margin-top: 8px;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 8px;
+
+    flex-wrap: wrap;
+}
+
+
+.recentTitle {
+    font-size: 11px;
+
+    opacity: 0.75;
+
+    margin-right: 3px;
+}
+
+
+.recentCity {
+    padding: 5px 12px;
+
+    border-radius: 20px;
+
+    border: 1px solid rgba(255, 255, 255, 0.35);
+
+    background: rgba(255, 255, 255, 0.16);
+
+    color: white;
+
+    font-family: "Comfortaa", sans-serif;
+
+    font-size: 12px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.recentCity:hover {
+    background: rgba(255, 255, 255, 0.30);
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+   ========================================================= */
+
+.mainContentParentDiv {
+    width: 100%;
+    height: 90vh;
+
+    display: flex;
+    flex-direction: row;
+
+    padding-bottom: 20px;
+
+    position: relative;
+
+    z-index: 2;
+}
+
+
+/* =========================================================
+   LEFT SIDE
+   ========================================================= */
+
+.leftDiv {
+    width: 30%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 15px;
+}
+
+
+.leftChild {
+    width: 85%;
+
+    margin: auto;
+
+    background: rgba(212, 212, 212, 0.42);
+
+    border-radius: 15px;
+
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+
+    color: white;
+}
+
+
+/* =========================================================
+   CURRENT WEATHER
+   ========================================================= */
+
+.currentTempDiv {
+    height: 42vh;
+
+    flex-shrink: 0;
+}
+
+
+.currentTempDiv h6 {
+    font-size: 18px;
+}
+
+
+#cityName {
+    font-size: 32px;
+
+    line-height: 1.25;
+}
+
+
+#cityTemp {
+    font-size: 26px;
+}
+
+
+#temperatureUnit {
+    font-size: 26px;
+}
+
+
+#skyDesc {
+    text-transform: capitalize;
+
+    font-size: 18px;
+}
+
+
+.line {
+    width: 100%;
+
+    border: 0;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.45);
+
+    margin: 12px 0;
+}
+
+
+/* =========================================================
+   COMING 5 DAYS
+   ========================================================= */
+
+.nextFiveDays {
+    height: 38vh;
+
+    min-height: 290px;
+
+    overflow: hidden;
+
+    flex-shrink: 0;
+}
+
+
+#comingFiveDaysTitle {
+    font-size: 25px;
+
+    margin-bottom: 5px !important;
+}
+
+
+#forecastContainer {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 3px;
+
+    overflow: hidden;
+}
+
+
+.forecastRow {
+    width: 100%;
+
+    min-height: 42px;
+
+    display: grid;
+
+    grid-template-columns:
+        42px
+        42px
+        55px
+        1fr;
+
+    align-items: center;
+
+    padding: 3px 4px;
+
+    border-radius: 10px;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.forecastRow:hover {
+    background: rgba(255, 255, 255, 0.12);
+
+    transform: translateX(3px);
+}
+
+
+.forecastRow > div {
+    display: flex;
+
+    align-items: center;
+}
+
+
+.forecastRow strong {
+    font-size: 14px;
+}
+
+
+.forecastRow img {
+    width: 32px;
+    height: 32px;
+
+    object-fit: contain;
+}
+
+
+.forecastRow > div:last-child {
+    font-size: 12px;
+
+    text-transform: capitalize;
+
+    padding-left: 4px;
+}
+
+
+/* =========================================================
+   RIGHT SIDE
+   ========================================================= */
+
+.rightDiv {
+    width: 70%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 15px;
+
+    padding-right: 35px;
+}
+
+
+/* =========================================================
+   RIGHT ROWS
+   ========================================================= */
+
+.rightRow {
+    width: 100%;
+}
+
+
+.rowOne {
+    height: 27vh;
+}
+
+
+.rowTwo {
+    height: 27vh;
+}
+
+
+.rowThree {
+    height: 27vh;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   TOP METRICS
+   ========================================================= */
+
+.extraMetric {
+    width: 23%;
+
+    padding: 28px 14px;
+
+    background: rgba(212, 212, 212, 0.42);
+
+    border-radius: 15px;
+
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+
+    display: flex;
+    align-items: center;
+
+    transition:
+        transform 0.25s ease,
+        background 0.25s ease;
+}
+
+
+.extraMetric:hover {
+    transform: translateY(-3px);
+
+    background: rgba(230, 230, 230, 0.5);
+}
+
+
+.extraMetric img {
+    width: 35px;
+    height: 35px;
+
+    object-fit: contain;
+}
+
+
+.extraMetric h6 {
+    white-space: nowrap;
+
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   AQI + SUNRISE / SUNSET
+   ========================================================= */
+
+.rowTwoDiv {
+    width: 45%;
+    height: 85%;
+
+    background: rgba(212, 212, 212, 0.42);
+
+    border-radius: 15px;
+
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+}
+
+
+/* =========================================================
+   AQI
+   ========================================================= */
+
+.AQI h5 {
+    font-size: 18px;
+}
+
+
+.AQI > div {
+    gap: 14px;
+}
+
+
+.AQI > div > div {
+    min-width: 55px;
+
+    text-align: center;
+}
+
+
+.AQI h6 {
+    margin-bottom: 0;
+
+    white-space: nowrap;
+
+    font-size: 12px;
+}
+
+
+.AQI > div > div h6:first-child {
+    font-size: 14px;
+}
+
+
+.AQI > div > div h6:last-child {
+    white-space: nowrap;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   SUNRISE / SUNSET
+   ========================================================= */
+
+.sunRise {
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+.sunRise h5 {
+    font-size: 18px;
+}
+
+
+.sunriseDiv,
+.sunsetDiv {
+    min-width: 45%;
+}
+
+
+.sunriseDiv img,
+.sunsetDiv img {
+    object-fit: contain;
+}
+
+
+/* =========================================================
+   TODAY
+   ========================================================= */
+
+.rowThree > h5 {
+    font-size: 20px;
+}
+
+
+.todayTempParentDiv {
+    width: 100%;
+
+    display: flex;
+
+    justify-content: flex-start !important;
+
+    align-items: stretch;
+
+    gap: 10px;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    padding-bottom: 5px;
+}
+
+
+.todayTempParentDiv::-webkit-scrollbar {
+    height: 5px;
+}
+
+
+.todayTempParentDiv::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.35);
+
+    border-radius: 10px;
+}
+
+
+.todayForecastItem {
+    flex: 0 0 82px;
+
+    padding: 10px;
+
+    background: rgba(212, 212, 212, 0.42);
+
+    border-radius: 15px;
+
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+
+    text-align: center;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    transition:
+        transform 0.25s ease,
+        background 0.25s ease;
+}
+
+
+.todayForecastItem:hover {
+    transform: translateY(-4px);
+
+    background: rgba(230, 230, 230, 0.5);
+}
+
+
+.todayForecastItem img {
+    width: 35px;
+    height: 35px;
+
+    object-fit: contain;
+}
+
+
+.todayTime {
+    font-size: 12px;
+}
+
+
+.todayTempValue {
+    font-size: 16px;
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   WEATHER EFFECTS
+   ========================================================= */
+
+.weather-effects {
+    position: fixed;
+
+    inset: 0;
+
+    overflow: hidden;
+
+    pointer-events: none;
+
+    z-index: 1;
+}
+
+
+/* =========================================================
+   CLEAR WEATHER
+   ========================================================= */
+
+body.weather-clear::before {
+    content: "";
+
+    position: fixed;
+
+    width: 300px;
+    height: 300px;
+
+    right: 12%;
+    bottom: 8%;
+
+    border-radius: 50%;
+
+    background: rgba(255, 190, 60, 0.35);
+
+    filter: blur(35px);
+
+    pointer-events: none;
+
+    z-index: 0;
+
+    animation:
+        sunGlow 4s ease-in-out infinite alternate;
+}
+
+
+@keyframes sunGlow {
+
+    from {
+        transform: scale(0.95);
+
+        opacity: 0.45;
+    }
+
+    to {
+        transform: scale(1.08);
+
+        opacity: 0.75;
+    }
+}
+
+
+/* =========================================================
+   CLOUDS
+   ========================================================= */
+
+.weather-cloud {
+    position: absolute;
+
+    width: 180px;
+    height: 55px;
+
+    background: rgba(255, 255, 255, 0.16);
+
+    border-radius: 50px;
+
+    opacity: 0.55;
+
+    animation:
+        cloudMove 35s linear infinite;
+
+    pointer-events: none;
+}
+
+
+.weather-cloud::before,
+.weather-cloud::after {
+    content: "";
+
+    position: absolute;
+
+    background: inherit;
+
+    border-radius: 50%;
+}
+
+
+.weather-cloud::before {
+    width: 85px;
+    height: 85px;
+
+    left: 25px;
+    bottom: 20px;
+}
+
+
+.weather-cloud::after {
+    width: 65px;
+    height: 65px;
+
+    right: 25px;
+    bottom: 18px;
+}
+
+
+.weather-cloud.slow {
+    animation-duration: 45s;
+}
+
+
+@keyframes cloudMove {
+
+    from {
+        transform: translateX(-220px);
+    }
+
+    to {
+        transform: translateX(110vw);
+    }
+}
+
+
+/* =========================================================
+   RAIN
+   ========================================================= */
+
+.rain-drop {
+    position: absolute;
+
+    top: -30px;
+
+    width: 2px;
+    height: 22px;
+
+    background: rgba(210, 235, 255, 0.65);
+
+    border-radius: 50%;
+
+    transform: rotate(15deg);
+
+    animation:
+        rainFall linear infinite;
+}
+
+
+@keyframes rainFall {
+
+    0% {
+        transform:
+            translate3d(0, -40px, 0)
+            rotate(15deg);
+    }
+
+    100% {
+        transform:
+            translate3d(-80px, 110vh, 0)
+            rotate(15deg);
+    }
+}
+
+
+/* =========================================================
+   THUNDERSTORM
+   ========================================================= */
+
+body.weather-thunderstorm .rain-drop {
+    width: 2px;
+    height: 28px;
+
+    background:
+        rgba(200, 225, 255, 0.75);
+}
+
+
+body.weather-thunderstorm::before {
+    content: "";
+
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        rgba(10, 15, 35, 0.18);
+
+    pointer-events: none;
+
+    z-index: 0;
+}
+
+
+/* =========================================================
+   LIGHTNING
+   ========================================================= */
+
+.lightning {
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        rgba(255, 255, 255, 0);
+
+    pointer-events: none;
+
+    z-index: 3;
+
+    animation:
+        lightningFlash 7s infinite;
+}
+
+
+@keyframes lightningFlash {
+
+    0%,
+    88%,
+    92%,
+    100% {
+        background:
+            rgba(255, 255, 255, 0);
+    }
+
+    89% {
+        background:
+            rgba(255, 255, 255, 0.35);
+    }
+
+    90% {
+        background:
+            rgba(255, 255, 255, 0.05);
+    }
+
+    91% {
+        background:
+            rgba(255, 255, 255, 0.45);
+    }
+}
+
+
+/* =========================================================
+   SNOW
+   ========================================================= */
+
+.snowflake {
+    position: absolute;
+
+    top: -30px;
+
+    color: rgba(255, 255, 255, 0.85);
+
+    text-shadow:
+        0 0 5px rgba(255, 255, 255, 0.5);
+
+    animation:
+        snowFall linear infinite;
+
+    pointer-events: none;
+}
+
+
+@keyframes snowFall {
+
+    0% {
+        transform:
+            translate3d(0, -30px, 0)
+            rotate(0deg);
+    }
+
+    50% {
+        transform:
+            translate3d(35px, 50vh, 0)
+            rotate(180deg);
+    }
+
+    100% {
+        transform:
+            translate3d(-25px, 110vh, 0)
+            rotate(360deg);
+    }
+}
+
+
+/* =========================================================
+   MIST / FOG
+   ========================================================= */
+
+body.weather-mist::after {
+    content: "";
+
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        rgba(220, 230, 235, 0.12);
+
+    backdrop-filter: blur(1px);
+
+    pointer-events: none;
+
+    z-index: 1;
+}
+
+
+/* =========================================================
+   KEEP CONTENT ABOVE WEATHER EFFECTS
+   ========================================================= */
+
+.searchBar,
+.mainContentParentDiv {
+    position: relative;
+
+    z-index: 2;
+}
+
+
+/* =========================================================
+   WEATHER ALERTS
+   ========================================================= */
+
+.weatherAlert {
+    width: 52%;
+
+    margin: 0 auto 12px auto;
+
+    padding: 12px 16px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    border-radius: 15px;
+
+    background:
+        rgba(255, 180, 60, 0.22);
+
+    border:
+        1px solid rgba(255, 220, 150, 0.45);
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    color: white;
+
+    position: relative;
+
+    z-index: 10;
+
+    animation:
+        alertAppear 0.35s ease;
+}
+
+
+.alertIcon {
+    font-size: 25px;
+
+    flex-shrink: 0;
+}
+
+
+.alertContent {
+    flex: 1;
+
+    min-width: 0;
+}
+
+
+.alertTitle {
+    font-size: 14px;
+
+    font-weight: 700;
+
+    margin-bottom: 3px;
+}
+
+
+.alertMessage {
+    font-size: 12px;
+
+    line-height: 1.4;
+
+    opacity: 0.95;
+}
+
+
+.alertClose {
+    border: none;
+
+    background: transparent;
+
+    color: white;
+
+    font-size: 22px;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    padding: 2px 5px;
+
+    opacity: 0.8;
+
+    flex-shrink: 0;
+}
+
+
+.alertClose:hover {
+    opacity: 1;
+
+    transform: scale(1.1);
+}
+
+
+/* =========================================================
+   ALERT TYPES
+   ========================================================= */
+
+.weatherAlert.alert-rain {
+    background:
+        rgba(50, 130, 220, 0.25);
+
+    border-color:
+        rgba(150, 210, 255, 0.45);
+}
+
+
+.weatherAlert.alert-thunderstorm {
+    background:
+        rgba(100, 70, 180, 0.30);
+
+    border-color:
+        rgba(190, 160, 255, 0.50);
+}
+
+
+.weatherAlert.alert-heat {
+    background:
+        rgba(240, 100, 40, 0.28);
+
+    border-color:
+        rgba(255, 180, 100, 0.50);
+}
+
+
+.weatherAlert.alert-wind {
+    background:
+        rgba(70, 150, 170, 0.25);
+
+    border-color:
+        rgba(150, 230, 240, 0.45);
+}
+
+
+.weatherAlert.alert-visibility {
+    background:
+        rgba(130, 130, 130, 0.30);
+
+    border-color:
+        rgba(220, 220, 220, 0.45);
+}
+
+
+@keyframes alertAppear {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(-8px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+
+/* =========================================================
+   FORECAST WEATHER ALERT
+   ========================================================= */
+
+#forecastAlertContainer {
+    width: 100%;
+
+    margin-top: 8px;
+
+    display: flex;
+
+    justify-content: center;
+
+    position: relative;
+
+    z-index: 20;
+}
+
+
+.forecastAlert {
+    width: 100%;
+
+    max-width: 760px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 10px 16px;
+
+    border:
+        1px solid rgba(255, 255, 255, 0.35);
+
+    border-radius: 15px;
+
+    background:
+        rgba(30, 80, 150, 0.45);
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    color: white;
+
+    animation:
+        alertSlideDown 0.35s ease;
+}
+
+
+.forecastAlertIcon {
+    font-size: 22px;
+
+    flex-shrink: 0;
+}
+
+
+.forecastAlertText {
+    flex: 1;
+}
+
+
+.forecastAlertTitle {
+    font-size: 14px;
+
+    font-weight: 700;
+
+    margin-bottom: 2px;
+}
+
+
+.forecastAlertMessage {
+    font-size: 11px;
+
+    opacity: 0.9;
+}
+
+
+.forecastAlertClose {
+    border: none;
+
+    background: transparent;
+
+    color: white;
+
+    font-size: 20px;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    opacity: 0.8;
+}
+
+
+.forecastAlertClose:hover {
+    opacity: 1;
+}
+
+
+@keyframes alertSlideDown {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(-8px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media only screen and (max-width: 767px) {
+
+    body {
+        background-position: center;
+        background-size: 100%;
+        background-attachment: fixed;
+    }
+
+
+    /* Search */
+
+    .searchBar {
+        min-height: 155px;
+
+        padding-top: 15px;
+    }
+
+
+    .searchBarParentDiv {
+        width: 85%;
+    }
+
+
+    .unitToggle {
+        top: 58px;
+
+        right: 0;
+    }
+
+
+    /* Main */
+
+    .mainContentParentDiv {
+        height: auto;
+
+        flex-direction: column;
+    }
+
+
+    /* Left */
+
+    .leftDiv {
+        width: 100%;
+
+        height: auto;
+
+        gap: 15px;
+    }
+
+
+    .leftChild {
+        width: 85%;
+
+        height: auto;
+
+        min-height: 300px;
+    }
+
+
+    /* Right */
+
+    .rightDiv {
+        width: 100%;
+
+        height: auto;
+
+        padding-right: 0;
+
+        gap: 15px;
+
+        margin-top: 15px;
+    }
+
+
+    /* Metrics */
+
+    .rowOne {
+        width: 85%;
+
+        height: auto;
+
+        margin: auto;
+
+        flex-wrap: wrap;
+
+        gap: 10px !important;
+    }
+
+
+    .extraMetric {
+        width: calc(50% - 5px);
+
+        padding: 20px 10px;
+    }
+
+
+    /* AQI + Sunrise */
+
+    .rowTwo {
+        height: auto;
+
+        flex-direction: column;
+
+        gap: 10px;
+    }
+
+
+    .rowTwoDiv {
+        width: 85%;
+
+        height: auto;
+
+        min-height: 180px;
+    }
+
+
+    /* Today */
+
+    .rowThree {
+        width: 85%;
+
+        height: auto;
+
+        margin: auto;
+    }
+
+
+    .todayTempParentDiv {
+        overflow-x: auto;
+    }
+
+
+    /* Alerts */
+
+    .weatherAlert {
+        width: 85%;
+
+        margin-top: 5px;
+
+        padding: 10px 12px;
+    }
+
+
+    #forecastAlertContainer {
+        width: 90%;
+
+        margin: 8px auto 0;
+    }
+
+
+    .forecastAlert {
+        padding: 9px 12px;
+    }
+
+
+    .forecastAlertTitle {
+        font-size: 13px;
+    }
+
+
+    .forecastAlertMessage {
+        font-size: 10px;
+    }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media only screen and (max-width: 480px) {
+
+    .searchBarParentDiv {
+        width: 90%;
+    }
+
+
+    .leftChild,
+    .rowOne,
+    .rowTwoDiv,
+    .rowThree {
+        width: 90%;
+    }
+
+
+    #cityName {
+        font-size: 26px;
+    }
+
+
+    #cityTemp,
+    #temperatureUnit {
+        font-size: 22px;
+    }
+
+
+    .extraMetric {
+        padding: 18px 8px;
+    }
+
+
+    .extraMetric img {
+        width: 28px;
+
+        height: 28px;
+    }
+
+
+    .extraMetric h6 {
+        font-size: 11px;
+    }
+
+
+    .todayForecastItem {
+        flex-basis: 80px;
+    }
+
+
+    .weatherAlert {
+        width: 90%;
+    }
+
+
+    .alertTitle {
+        font-size: 13px;
+    }
+
+
+    .alertMessage {
+        font-size: 11px;
+    }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+
+        transition: none !important;
+    }
+
+
+    .rain-drop,
+    .snowflake,
+    .lightning,
+    .weather-cloud {
+        animation: none !important;
+    }
+}
